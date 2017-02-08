@@ -12,11 +12,16 @@
     },
 
     "license": "MIT",
-    "minimum-stability" : "dev",
     "authors": [
         {
             "name": "lichv lee",
             "email": "lichvg@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+          "Lichv\\Socialite\\": "src/"
+      }
+  },
+  "minimum-stability": "dev"
 }
