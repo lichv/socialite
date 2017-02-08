@@ -1,6 +1,6 @@
 {
     "name": "lichv/socialite",
-    "description": "A collection of OAuth 2 packages that extracts from laravel/socialite.",
+    "description": "A collection of OAuth 2 packages that extracts from lichv/socialite.",
     "keywords": ["OAuth", "social", "login", "Weibo", "WeChat", "QQ"],
     "autoload": {
         "psr-4": {
