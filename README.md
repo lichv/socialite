@@ -1,16 +1,24 @@
-参考 lichv/socialite 
-#Requirement
+# Socialite
 
+
+# Requirement
+
+```
 PHP >= 5.4
-Installation
+```
+# Installation
 
-$ composer require "lichv/socialite:~1.0"
-Usage
+```shell
+$ composer require "overtrue/socialite:~1.0"
+```
 
-authorize.php:
+# Usage
 
+`authorize.php`:
+
+```php
 <?php
-use Lichv\Socialite\SocialiteManager;
+use Overtrue\Socialite\SocialiteManager;
 
 $config = [
     'github' => [
@@ -25,28 +33,33 @@ $socialite = new SocialiteManager($config);
 $response = $socialite->driver('github')->redirect();
 
 echo $response;// or $response->send();
-callback.php:
+```
 
+`callback.php`:
+
+```php
 <?php
 
 // ...
 $user = $socialite->driver('github')->user();
 
 $user->getId();        // 1472352
-$user->getNickname();  // "lichv"
+$user->getNickname();  // "overtrue"
 $user->getName();      // "安正超"
 $user->getEmail();     // "anzhengchao@gmail.com"
 ...
-Configuration
+```
+
+### Configuration
 
 Now we support the following sites:
 
-facebook, github, google, linkedin, weibo, qq, wechat and douban.
+`facebook`, `github`, `google`, `linkedin`, `weibo`, `qq`, `wechat` and `douban`.
 
-Each drive uses the same configuration keys: client_id, client_secret, redirect.
+Each drive uses the same configuration keys: `client_id`, `client_secret`, `redirect`.
 
 example:
-
+```
 ...
   'weibo' => [
     'client_id'     => 'your-app-id',
@@ -54,50 +67,66 @@ example:
     'redirect'      => 'http://localhost/socialite/callback.php',
   ],
 ...
-Scope
+```
+
+### Scope
 
 Before redirecting the user, you may also set "scopes" on the request using the scope method. This method will overwrite all existing scopes:
 
+```php
 $response = $socialite->driver('github')
                 ->scopes(['scope1', 'scope2'])->redirect();
-Redirect URL
 
-You may also want to dynamic set redirect，you can use the following methods to change the redirect URL:
+```
 
+### Redirect URL
+
+You may also want to dynamic set `redirect`，you can use the following methods to change the `redirect` URL:
+
+```php
 $socialite->redirect($url);
 // or
 $socialite->withRedirectUrl($url)->redirect();
 // or
 $socialite->setRedirectUrl($url)->redirect();
-WeChat scopes:
+```
 
-snsapi_base, snsapi_userinfo - Used to Media Platform Authentication.
-snsapi_login - Used to web Authentication.
-Additional parameters
+> WeChat scopes:
+- `snsapi_base`, `snsapi_userinfo` - Used to Media Platform Authentication.
+- `snsapi_login` - Used to web Authentication.
+
+### Additional parameters
 
 To include any optional parameters in the request, call the with method with an associative array:
 
+```php
 $response = $socialite->driver('google')
                     ->with(['hd' => 'example.com'])->redirect();
-User interface
+```
 
-Standard user api:
+### User interface
 
+#### Standard user api:
+
+```php
 
 $user = $socialite->driver('weibo')->user();
+```
+
+```json
 {
   "id": 1472352,
-  "nickname": "lichv",
+  "nickname": "overtrue",
   "name": "安正超",
   "email": "anzhengchao@gmail.com",
   "avatar": "https://avatars.githubusercontent.com/u/1472352?v=3",
   "original": {
-    "login": "lichv",
+    "login": "overtrue",
     "id": 1472352,
     "avatar_url": "https://avatars.githubusercontent.com/u/1472352?v=3",
     "gravatar_id": "",
-    "url": "https://api.github.com/users/lichv",
-    "html_url": "https://github.com/lichv",
+    "url": "https://api.github.com/users/overtrue",
+    "html_url": "https://github.com/overtrue",
     ...
   },
   "token": {
@@ -106,15 +135,21 @@ $user = $socialite->driver('weibo')->user();
     "scope": "user:email"
   }
 }
+```
+
 You can fetch the user attribute as a array key like this:
 
+```php
 $user['id'];        // 1472352
-$user['nickname'];  // "lichv"
+$user['nickname'];  // "overtrue"
 $user['name'];      // "安正超"
 $user['email'];     // "anzhengchao@gmail.com"
 ...
+```
+
 Or using method:
 
+```php
 $user->getId();
 $user->getNickname();
 $user->getName();
@@ -122,36 +157,73 @@ $user->getEmail();
 $user->getAvatar();
 $user->getOriginal();
 $user->getToken();// or $user->getAccessToken()
-Get original response from OAuth API
+```
 
-The $user->getOriginal() method will return an array of the API raw response.
+#### Get original response from OAuth API
 
-Get access token Object
+The `$user->getOriginal()` method will return an array of the API raw response.
 
-You can get the access token instance of current session by call $user->getToken() or $user->getAccessToken() or $user['token'] .
+#### Get access token Object
 
-Get user with access token
+You can get the access token instance of current session by call `$user->getToken()` or `$user->getAccessToken()` or `$user['token']` .
 
+
+### Get user with access token
+
+```php
 $accessToken = new AccessToken(['access_token' => $accessToken]);
 $user = $socialite->user($accessToken);
-Custom Session or Request instance.
+```
 
-You can set the request with your custom Request instance which instanceof Symfony\Component\HttpFoundation\Request.
 
+### Custom Session or Request instance.
+
+You can set the request with your custom `Request` instance which instanceof `Symfony\Component\HttpFoundation\Request`.
+
+
+```php
 
 $request = new Request(); // or use AnotherCustomRequest.
 
 $socialite = new SocialiteManager($config, $request);
-Or set request to SocialiteManager instance:
+```
 
+Or set request to `SocialiteManager` instance:
+
+```php
 $socialite->setRequest($request);
-You can get the request from SocialiteManager instance by getRequest():
+```
 
+You can get the request from `SocialiteManager` instance by `getRequest()`:
+
+```php
 $request = $socialite->getRequest();
-Set custom session manager.
+```
 
-By default, the SocialiteManager use Symfony\Component\HttpFoundation\Session\Session instance as session manager, you can change it as following lines:
+#### Set custom session manager.
 
+By default, the `SocialiteManager` use `Symfony\Component\HttpFoundation\Session\Session` instance as session manager, you can change it as following lines:
+
+```php
 $session = new YourCustomSessionManager();
 $socialite->getRequest()->setSession($session);
-Your custom session manager must be implement the Symfony\Component\HttpFoundation\Session\SessionInterface.
+```
+
+> Your custom session manager must be implement the [`Symfony\Component\HttpFoundation\Session\SessionInterface`](http://api.symfony.com/3.0/Symfony/Component/HttpFoundation/Session/SessionInterface.html).
+
+Enjoy it! :heart:
+
+# Reference
+
+- [Google - OpenID Connect](https://developers.google.com/identity/protocols/OpenIDConnect)
+- [Facebook - Graph API](https://developers.facebook.com/docs/graph-api)
+- [Linkedin - Authenticating with OAuth 2.0](https://developer.linkedin.com/docs/oauth2)
+- [微博 - OAuth 2.0 授权机制说明](http://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6%E8%AF%B4%E6%98%8E)
+- [QQ - OAuth 2.0 登录QQ](http://wiki.connect.qq.com/oauth2-0%E7%AE%80%E4%BB%8B)
+- [微信公众平台 - OAuth文档](http://mp.weixin.qq.com/wiki/9/01f711493b5a02f24b04365ac5d8fd95.html)
+- [微信开放平台 - 网站应用微信登录开发指南](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419316505&token=&lang=zh_CN)
+- [豆瓣 - OAuth 2.0 授权机制说明](http://developers.douban.com/wiki/?title=oauth2)
+
+# License
+
+MIT
