@@ -2,12 +2,10 @@
 
 namespace Lichv\Socialite;
 
-use Illuminate\Support\Facades\Facade;
-
 /**
  * Class Socialite.
  */
-class Socialite extends Facade
+class Facade extends \Illuminate\Support\Facades\Facade
 {
     /**
      * Return the facade accessor.
