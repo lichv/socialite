@@ -19,6 +19,14 @@ class Socialite extends Facade
         return 'Lichv\\Socialite\\SocialiteManager';
     }
 
+    /**
+     * 获取 服务
+     *
+     * @param string $name
+     * @param array  $args
+     *
+     * @return mixed
+     */
     public static function __callStatic($name, $args)
     {
         $app = static::getFacadeRoot();
