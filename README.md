@@ -1,16 +1,16 @@
-参考 overtrue/socialite 
+参考 lichv/socialite 
 #Requirement
 
 PHP >= 5.4
 Installation
 
-$ composer require "overtrue/socialite:~1.0"
+$ composer require "lichv/socialite:~1.0"
 Usage
 
 authorize.php:
 
 <?php
-use Overtrue\Socialite\SocialiteManager;
+use Lichv\Socialite\SocialiteManager;
 
 $config = [
     'github' => [
@@ -33,7 +33,7 @@ callback.php:
 $user = $socialite->driver('github')->user();
 
 $user->getId();        // 1472352
-$user->getNickname();  // "overtrue"
+$user->getNickname();  // "lichv"
 $user->getName();      // "安正超"
 $user->getEmail();     // "anzhengchao@gmail.com"
 ...
@@ -87,17 +87,17 @@ Standard user api:
 $user = $socialite->driver('weibo')->user();
 {
   "id": 1472352,
-  "nickname": "overtrue",
+  "nickname": "lichv",
   "name": "安正超",
   "email": "anzhengchao@gmail.com",
   "avatar": "https://avatars.githubusercontent.com/u/1472352?v=3",
   "original": {
-    "login": "overtrue",
+    "login": "lichv",
     "id": 1472352,
     "avatar_url": "https://avatars.githubusercontent.com/u/1472352?v=3",
     "gravatar_id": "",
-    "url": "https://api.github.com/users/overtrue",
-    "html_url": "https://github.com/overtrue",
+    "url": "https://api.github.com/users/lichv",
+    "html_url": "https://github.com/lichv",
     ...
   },
   "token": {
@@ -109,7 +109,7 @@ $user = $socialite->driver('weibo')->user();
 You can fetch the user attribute as a array key like this:
 
 $user['id'];        // 1472352
-$user['nickname'];  // "overtrue"
+$user['nickname'];  // "lichv"
 $user['name'];      // "安正超"
 $user['email'];     // "anzhengchao@gmail.com"
 ...
