@@ -1,5 +1,5 @@
 <?php
-namespace Lichv\Socialite\Providers;
+namespace Lichv\Socialite;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 use Lichv\Socialite\SocialiteManager;
