@@ -20,10 +20,10 @@ use Lichv\Socialite\User;
  *
  * @link http://wiki.connect.qq.com/oauth2-0%E7%AE%80%E4%BB%8B [QQ - OAuth 2.0 登录QQ]
  */
-class QQmpProvider extends AbstractProvider implements ProviderInterface
+class QpProvider extends AbstractProvider implements ProviderInterface
 {
     /**
-     * The base url of QQ API.
+     * The base url of QQ open API.
      *
      * @var string
      */
@@ -74,7 +74,7 @@ class QQmpProvider extends AbstractProvider implements ProviderInterface
      */
     protected function getAuthUrl($state)
     {
-        return $this->buildAuthUrlFromBase($this->baseUrl.'/connect/oauth2/authorize', $state);
+        return $this->buildAuthUrlFromBase($this->authUrl.'/connect/oauth2/authorize', $state);
     }
 
     /**
@@ -158,7 +158,7 @@ class QQmpProvider extends AbstractProvider implements ProviderInterface
             throw new InvalidArgumentException('openid of AccessToken is required.');
         }
 
-        $response = $this->getHttpClient()->get($this->baseUrl.'/sns/userinfo', [
+        $response = $this->getHttpClient()->get($this->baseUrl.'/cgi-bin/user/info', [
             'query' => [
                 'access_token' => $token->getToken(),
                 'openid' => $token['openid'],
