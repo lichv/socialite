@@ -1,6 +1,6 @@
 # Socialite
 
-参考 overtrue/socialite 添加 QQ公众号登录
+参考 overtrue/socialite 添加 QQ公众号登录，后续添加支付宝登录
 # Requirement
 
 ```
