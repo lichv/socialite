@@ -56,7 +56,7 @@ class QpProvider extends AbstractProvider implements ProviderInterface
      *
      * @var array
      */
-    protected $scopes = ['get_user_info'];
+    protected $scopes = ['snsapi_base'];
 
     /**
      * The uid of user authorized.
