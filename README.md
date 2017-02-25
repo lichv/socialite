@@ -1,7 +1,6 @@
 # Socialite
 
-参考 overtrue/socialite 
-
+参考 overtrue/socialite 添加 QQ公众号登录
 # Requirement
 
 ```
