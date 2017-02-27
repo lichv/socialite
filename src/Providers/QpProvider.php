@@ -193,6 +193,22 @@ class QpProvider extends AbstractProvider implements ProviderInterface
         ]);
     }
 
+    protected function getCodeFields($state = null)
+    {
+        $fields = array_merge([
+            'appid' => $this->clientId,
+            'redirect_uri' => $this->redirectUrl,
+            'scope' => $this->formatScopes($this->scopes, $this->scopeSeparator),
+            'response_type' => 'code',
+        ], $this->parameters);
+
+        if ($this->usesState()) {
+            $fields['state'] = $state;
+        }
+
+        return $fields;
+    }
+
     /**
      * Remove the fucking callback parentheses.
      *
