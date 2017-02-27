@@ -333,7 +333,7 @@ abstract class AbstractProvider implements ProviderInterface
     protected function getCodeFields($state = null)
     {
         $fields = array_merge([
-            'appid' => $this->clientId,
+            'client_id' => $this->clientId,
             'redirect_uri' => $this->redirectUrl,
             'scope' => $this->formatScopes($this->scopes, $this->scopeSeparator),
             'response_type' => 'code',

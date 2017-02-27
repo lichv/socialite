@@ -96,7 +96,12 @@ class QpProvider extends AbstractProvider implements ProviderInterface
      */
     protected function getTokenFields($code)
     {
-        return parent::getTokenFields($code) + ['grant_type' => 'authorization_code'];
+        return [
+            'appid' => $this->clientId,
+            'secret' => $this->clientSecret,
+            'code' => $code,
+            'grant_type' => 'authorization_code',
+        ];
     }
 
     /**
