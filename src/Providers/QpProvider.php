@@ -153,11 +153,6 @@ class QpProvider extends AbstractProvider implements ProviderInterface
      */
     protected function getUserByToken(AccessTokenInterface $token)
     {
-        $scopes = explode(',', $token->getAttribute('scope', ''));
-
-        if (in_array('snsapi_base', $scopes)) {
-            return $token->toArray();
-        }
 
         if (empty($token['openid'])) {
             throw new InvalidArgumentException('openid of AccessToken is required.');
