@@ -121,20 +121,6 @@ class QpProvider extends AbstractProvider implements ProviderInterface
     }
 
     /**
-     * Get the access token from the token response body.
-     *
-     * @param string $body
-     *
-     * @return \Lichv\Socialite\AccessToken
-     */
-    public function parseAccessToken($body)
-    {
-        parse_str($body, $token);
-
-        return parent::parseAccessToken($token);
-    }
-
-    /**
      * @return self
      */
     public function withUnionId()
