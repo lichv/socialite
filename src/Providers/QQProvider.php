@@ -55,7 +55,7 @@ class QQProvider extends AbstractProvider implements ProviderInterface
      *
      * @var array
      */
-    protected $scopes = ['snsapi_base'];
+    protected $scopes = ['get_user_info'];
 
     /**
      * The uid of user authorized.
@@ -112,6 +112,20 @@ class QQProvider extends AbstractProvider implements ProviderInterface
         ]);
 
         return $this->parseAccessToken($response->getBody()->getContents());
+    }
+
+    /**
+     * Get the access token from the token response body.
+     *
+     * @param string $body
+     *
+     * @return \Lichv\Socialite\AccessToken
+     */
+    public function parseAccessToken($body)
+    {
+        parse_str($body, $token);
+
+        return parent::parseAccessToken($token);
     }
 
     /**
